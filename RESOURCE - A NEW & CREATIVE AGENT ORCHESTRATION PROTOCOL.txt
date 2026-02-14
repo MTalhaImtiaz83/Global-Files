@@ -1,0 +1,161 @@
+This is a smart strategic move. You are correct: creating 10 different repositories is the wrong approach. It fragments your "brain." The "Anti-Gravity" architecture  is designed exactly for what you want: a **Monorepo (Single Repository)** where all your skills live, and a central "Orchestrator" agent that picks the right tool for the job.
+
+Since you are a consultant/marketer and not a systems engineer, I will give you the **"Executive Setup Guide"**. This setup allows you to dump all those GitHub skills into one folder, and have the Agent "wake up," look at your request, and decide which skills to pull off the shelf.
+
+Here is your roadmap to building the **ConsultantOS** using the Anti-Gravity framework.
+
+---
+
+### Phase 1: The Architecture (The "One Repo" Rule)
+
+Instead of separate projects, you will set up **one** master folder. The Agent lives at the top, and the Skills live in the basement until called upon.
+
+**Your Directory Structure must look like this:**
+*(I have organized the links you provided into logical Skill categories based on your consulting work)*
+
+```text
+ConsultantOS/
+├── .env                       # API Keys (Gemini, Claude, Firecrawl)
+├── AGENTS.md                  # The Core Brain (Paste the file you uploaded)
+├── .tmp/                      # Temporary working memory (delete anytime)
+├── directives/                # Your Standard Operating Procedures (SOPs)
+│   ├── 00_START_PROJECT.md    # The "Manager" directive (I will write this for you below)
+│   └── ...
+├── execution/                 # Python scripts (The hands that do the work)
+└── SKILLS/                    # The Library (Where your GitHub links go)
+    ├── strategy-consulting/
+    │   ├── brainstorming/     # from obra/superpowers
+    │   └── marketing-audit/   # from coreyhaines/marketingskills
+    ├── writing-comms/
+    │   └── pro-writer/        # from obra/superpowers/skills/writing-skills
+    ├── technical-build/
+    │   ├── react-expert/      # from vercel-labs
+    │   └── debugging/         # from obra/superpowers
+    ├── research/
+    │   └── web-browser/       # from vercel-labs/agent-browser
+    └── creative-design/
+        ├── ui-system/         # from davila7/claude-code-templates
+        └── saas-pricing/      # from aura.build
+
+```
+
+---
+
+### Phase 2: Installing the Skills
+
+You don't need to "code" these. You need to copy the `SKILL.md` (and any attached scripts) from the repositories you found into the folders above.
+
+**How to organize the links you provided:**
+
+1. **For Strategy & Brainstorming:**
+* Take the content from `obra/superpowers/tree/main/skills/brainstorming` and place it in `SKILLS/strategy-consulting/brainstorming/`.
+* Take `coreyhaines31/marketingskills` and place it in `SKILLS/strategy-consulting/marketing-audit/`.
+
+
+2. **For Writing & Proposals:**
+* Take `obra/superpowers/tree/main/skills/writing-skills` and place it in `SKILLS/writing-comms/pro-writer/`.
+
+
+3. **For Research:**
+* Take `vercel-labs/agent-browser` and place it in `SKILLS/research/web-browser/`. *Note: This usually requires an API like Firecrawl or similar, which goes in your execution scripts.*
+
+
+4. **For Design & Build (When you advise clients on tech):**
+* Use the `anthropics/skills/frontend-design` and `aura.build` links for your `SKILLS/creative-design/` folder.
+
+
+
+**The Golden Rule:** Each folder in `SKILLS/` should contain a `SKILL.md` file that explains *how* to use that specific skill. The Agent reads this to understand what it can do.
+
+---
+
+### Phase 3: The "Manager" Directive
+
+You asked for the agent to **decide** what to do. In the Anti-Gravity system, you need a "Router" or "Manager" directive. This is the first file the Agent reads.
+
+Create a file named `directives/00_PROJECT_MANAGER.md`. Copy this content in:
+
+```markdown
+# Directive: Project Manager & Skill Router
+
+## Goal
+You are the Lead Consultant. Your goal is to analyze the user's request, identify which SKILLS from the `SKILLS/` directory are required, and create a plan of action.
+
+## Inputs
+- User Request (e.g., "Create a marketing proposal for a coffee shop")
+- Available Skills: Scan the `SKILLS/` directory to see what teams are available.
+
+## Workflow (The 3-Layer Logic)
+1. **Analyze Intent:**
+   - What is the user actually asking for? (Strategy? Design? Coding? Research?)
+   - [cite_start]Restate the goal clearly[cite: 4].
+
+2. **Skill Selection:**
+   - Look at the `SKILLS/` folders.
+   - Select the exact sub-agents needed.
+   - Example: If the user wants a "SaaS Landing Page," select:
+     - `SKILLS/strategy-consulting/marketing-audit` (for copy strategy)
+     - `SKILLS/creative-design/saas-pricing` (for layout)
+
+3. **Draft the Plan:**
+   - Propose a step-by-step execution plan.
+   - Ask the user for approval before executing.
+
+4. **Execution:**
+   - Once approved, load the specific `SKILL.md` files for the selected skills.
+   - Execute the steps using the `execution/` scripts defined in those skills.
+
+## Rules
+- Do not hallucinate skills we do not have.
+- If a specific tool (like a Python script) is missing in `execution/`, check if the Skill folder provides it. [cite_start]If not, write it using the "Self-annealing" principle[cite: 22, 23].
+
+```
+
+---
+
+### Phase 4: Integrating Gemini 3 & Claude (The Brains)
+
+The Anti-Gravity system is model-agnostic. To use the best of both worlds (Gemini for speed/context window, Claude for reasoning/coding):
+
+1. **The `.env` file:**
+```bash
+GOOGLE_API_KEY=your_gemini_key
+ANTHROPIC_API_KEY=your_claude_key
+# Add Firecrawl or Perplexity keys here for browsing
+
+```
+
+
+2. **The Execution Strategy:**
+You want the **Agent (Orchestrator)** to use the smartest model available (e.g., Claude 3.5 Sonnet or Gemini 1.5 Pro) to read the `AGENTS.md` and make decisions.
+However, inside your `execution/` scripts, you can call specific models for specific tasks.
+*Example Script Logic:*
+* If the task is **"Analyze 50 PDF files"** -> The script should call **Gemini 1.5 Pro** (massive context window).
+* If the task is **"Write a sensitive client email"** -> The script should call **Claude** (nuance).
+
+
+
+### Phase 5: How to Run It (Your Daily Workflow)
+
+When you sit down to work:
+
+1. Open your code editor (VS Code or Cursor) to the `ConsultantOS` folder.
+2. Open your AI Chat Interface (Cursor Composer, or a script connecting to the API).
+3. **Prompt:**
+> "I am acting as the User. You are the Anti-Gravity Agent. Read `AGENTS.md` to understand your architecture. Read `directives/00_PROJECT_MANAGER.md` to understand your job.
+> **My Request:** I have a new client who needs a rebranding strategy and a new high-conversion pricing page. Please review our `SKILLS/` library and tell me how we will attack this."
+
+
+
+**The Result:**
+The Agent will scan your `SKILLS/` folder, see you have `marketing-audit` and `saas-pricing` skills, and propose a plan integrating them. It keeps the "Anti-Gravity" promise: clear separation between the decision (Orchestrator) and the work (Execution).
+
+### Summary Checklist for You
+
+1. [ ] Create the folder structure shown in Phase 1.
+2. [ ] Copy the `AGENTS.md` and `Instructions.txt` you provided into the root.
+3. [ ] Go to the GitHub links you found, copy their `SKILL.md` files, and paste them into the relevant `SKILLS/` subfolders.
+4. [ ] Create `directives/00_PROJECT_MANAGER.md`.
+5. [ ] Start the agent.
+
+This moves you from "10 messy repos" to "1 consultancy powerhouse."
